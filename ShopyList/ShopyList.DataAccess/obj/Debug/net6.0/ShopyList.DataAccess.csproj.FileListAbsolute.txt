@@ -1,0 +1,14 @@
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\bin\Debug\net6.0\ShopyList.DataAccess.deps.json
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\bin\Debug\net6.0\ShopyList.DataAccess.runtimeconfig.json
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\bin\Debug\net6.0\ShopyList.DataAccess.dll
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\bin\Debug\net6.0\ShopyList.DataAccess.pdb
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.AssemblyInfo.cs
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.dll
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\refint\ShopyList.DataAccess.dll
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.pdb
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ShopyList.DataAccess.genruntimeconfig.cache
+C:\Users\Rob\Desktop\GitHub\ShopyList\ShopyList\ShopyList.DataAccess\obj\Debug\net6.0\ref\ShopyList.DataAccess.dll
