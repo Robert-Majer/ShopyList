@@ -1,10 +1,13 @@
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using ShopyList.ApplicationServices.API.Domain;
 using ShopyList.DataAccess;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 builder.Services.AddDbContext<ShopyListStorageContext>(options => options.UseSqlServer("Data Source =.\\SQLEXPRESS; Initial Catalog = ShopyListStorage; Integrated Security = True"));
 builder.Services.AddControllers();
