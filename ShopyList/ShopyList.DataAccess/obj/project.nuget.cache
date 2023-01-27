@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "95dtMNp+A1MaTwWpvlujuY+FMeKENu1wFDYMXKQVbaljo4S3K+0aBI0ilFDcublv1KVN8fNJUBYiQLW9tS/krQ==",
+  "dgSpecHash": "vdzHDRYmY0tushINQ2gJh2Anbws/vhzRVhpd/0aJU8M/J4g/jvYFhKlOM44ZKizjyit5NkNkKJFlRLsvrOkOmw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Rob\\Desktop\\GitHub\\ShopyList\\ShopyList\\ShopyList.DataAccess\\ShopyList.DataAccess.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\Rob\\.nuget\\packages\\microsoft.entityframeworkcore.tools\\6.0.13\\microsoft.entityframeworkcore.tools.6.0.13.nupkg.sha512",
     "C:\\Users\\Rob\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\6.0.0\\microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Rob\\.nuget\\packages\\microsoft.extensions.caching.memory\\6.0.1\\microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
+    "C:\\Users\\Rob\\.nuget\\packages\\microsoft.extensions.configuration\\6.0.1\\microsoft.extensions.configuration.6.0.1.nupkg.sha512",
     "C:\\Users\\Rob\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Rob\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
     "C:\\Users\\Rob\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",

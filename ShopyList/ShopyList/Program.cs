@@ -9,8 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddMediatR(typeof(ResponseBase<>));
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-builder.Services.AddDbContext<ShopyListStorageContext>(options => options.UseSqlServer("Data Source =.\\SQLEXPRESS; Initial Catalog = ShopyListStorage; Integrated Security = True"));
 builder.Services.AddControllers();
+builder.Services.AddDbContext<ShopyListStorageContext>(opt => opt.UseSqlServer("name=ConnectionStrings:ShopyListDatabaseConnetcion"));
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

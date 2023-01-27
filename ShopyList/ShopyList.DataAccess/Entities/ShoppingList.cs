@@ -16,5 +16,6 @@ namespace ShopyList.DataAccess.Entities
         public DateTime Created { get; set; }
         public bool IsDeleted { get; set; }
         public List<Product> Products { get; set; }
+        public int NumberOfProducts { get; set; }
     }
 }
