@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ShopyList.DataAccess;
-using ShopyList.DataAccess.Entities;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using ShopyList.ApplicationServices.API.Domain;
 
 namespace ShopyList.Controllers
 {
@@ -8,19 +8,23 @@ namespace ShopyList.Controllers
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly IRepository<Product> productRepository;
+        private readonly IMediator mediator;
 
-        public ProductController(IRepository<Product> productRepository)
+        public ProductController(IMediator mediator)
         {
-            this.productRepository = productRepository;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public IEnumerable<Product> GetAllProducts() => this.productRepository.GetAll();
+        public async Task<IActionResult> GetAllProducts([FromQuery] GetProductsRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
 
-        [HttpGet]
-        [Route("{productId}")]
-        public Product GetProductById(int productId) => this.productRepository.GetById(productId);
+        //[HttpGet]
+        //[Route("{productId}")]
+        //public async Task<Product> GetProductById(int productId) => await this.mediator.GetById(productId);
     }
 }

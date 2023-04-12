@@ -1,38 +1,36 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using ShopyList.ApplicationServices.API.Domain;
-using ShopyList.ApplicationServices.API.Domain.Models;
-using ShopyList.DataAccess;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShopyList.DataAccess.CQRS;
+using ShopyList.DataAccess.CQRS.Queries;
 
 namespace ShopyList.ApplicationServices.API.Handlers
 {
     public class GetProductsHandler : IRequestHandler<GetProductsRequest, GetProtuctsResponse>
     {
-        private readonly IRepository<DataAccess.Entities.Product> productRepository;
+        private readonly IMapper mapper;
+        private readonly IQueryExecutor queryExecutor;
 
-        public GetProductsHandler(IRepository<DataAccess.Entities.Product> productRepository)
+        public GetProductsHandler(IMapper mapper, IQueryExecutor queryExecutor)
         {
-            this.productRepository = productRepository;
+            this.mapper = mapper;
+            this.queryExecutor = queryExecutor;
         }
 
-        public Task<GetProtuctsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
+        public async Task<GetProtuctsResponse> Handle(GetProductsRequest request, CancellationToken cancellationToken)
         {
-            var products = this.productRepository.GetAll();
-            var domainProducts = products.Select(x => new Domain.Models.Product()
+            var query = new GetProductsQuery()
             {
-                Id = x.Id,
-                Name = x.Name,
-            });
+                Name = request.Name
+            };
 
+            var products = await this.queryExecutor.Excecute(query);
+            var mappedProduct = this.mapper.Map<List<Domain.Models.Product>>(products);
             var response = new GetProtuctsResponse()
             {
-                Data = domainProducts.ToList(),
+                Data = mappedProduct
             };
-            return Task.FromResult(response);
+            return response;
         }
     }
 }

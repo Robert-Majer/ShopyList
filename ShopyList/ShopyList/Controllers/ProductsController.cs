@@ -22,5 +22,17 @@ namespace ShopyList.Controllers
             var response = await this.mediator.Send(request);
             return this.Ok(response);
         }
+
+        [HttpGet]
+        [Route("productId")]
+        public async Task<IActionResult> GetById([FromRoute] int productId)
+        {
+            var request = new GetProductByIdRequest()
+            {
+                ProductId = productId
+            };
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
     }
 }

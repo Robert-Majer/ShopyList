@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShopyList.ApplicationServices.API.Domain
+namespace ShopyList.ApplicationServices.API.Domain.ShopsRequestResponse
 {
-    public class GetShopsResponse : ResponseBase<List<Shop>>
+    public class GetShopByIdResponse : ResponseBase<Shop>
     {
     }
 }
