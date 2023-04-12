@@ -1,11 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
-using ShopyList.ApplicationServices.API.Domain;
 using ShopyList.ApplicationServices.API.Domain.Models;
+using ShopyList.ApplicationServices.API.Domain.ShoppingListsRequestResponse;
 using ShopyList.DataAccess.CQRS;
-using ShopyList.DataAccess.CQRS.Commands;
+using ShopyList.DataAccess.CQRS.Commands.ShoppingListsCommands;
 
-namespace ShopyList.ApplicationServices.API.Handlers
+namespace ShopyList.ApplicationServices.API.Handlers.ShoppingListsHandlers
 {
     public class AddShoppingListHandler : IRequestHandler<AddShoppingListRequest, AddShoppingListResponse>
     {
@@ -20,12 +20,12 @@ namespace ShopyList.ApplicationServices.API.Handlers
 
         public async Task<AddShoppingListResponse> Handle(AddShoppingListRequest request, CancellationToken cancellationToken)
         {
-            var shoppingList = this.mapper.Map<DataAccess.Entities.ShoppingList>(request);
+            var shoppingList = mapper.Map<DataAccess.Entities.ShoppingList>(request);
             var command = new AddShoppingListCommand() { Parameter = shoppingList };
-            var shoppingListFromDb = await this.commandExecutor.Execute(command);
+            var shoppingListFromDb = await commandExecutor.Execute(command);
             return new AddShoppingListResponse
             {
-                Data = this.mapper.Map<ShoppingList>(shoppingListFromDb)
+                Data = mapper.Map<ShoppingList>(shoppingListFromDb)
             };
         }
     }

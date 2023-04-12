@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ShopyList.ApplicationServices.API.Domain;
+using ShopyList.ApplicationServices.API.Domain.ProductsRequestResponse;
 
 namespace ShopyList.Controllers
 {
@@ -24,10 +24,38 @@ namespace ShopyList.Controllers
         }
 
         [HttpGet]
-        [Route("productId")]
+        [Route("{productId}")]
         public async Task<IActionResult> GetById([FromRoute] int productId)
         {
             var request = new GetProductByIdRequest()
+            {
+                ProductId = productId
+            };
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<IActionResult> AddProduct([FromBody] AddProductRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpPut]
+        [Route("")]
+        public async Task<IActionResult> EditProduct([FromBody] EditProductRequest request)
+        {
+            var response = await this.mediator.Send(request);
+            return this.Ok(response);
+        }
+
+        [HttpDelete]
+        [Route("{productId}")]
+        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
+        {
+            var request = new DeleteProductByIdRequest()
             {
                 ProductId = productId
             };

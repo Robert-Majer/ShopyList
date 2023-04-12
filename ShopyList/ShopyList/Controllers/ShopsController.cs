@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ShopyList.ApplicationServices.API.Domain;
 using ShopyList.ApplicationServices.API.Domain.ShopsRequestResponse;
 
 namespace ShopyList.Controllers

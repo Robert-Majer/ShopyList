@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using ShopyList.ApplicationServices.API.Domain;
 using ShopyList.ApplicationServices.API.Domain.ShopsRequestResponse;
 using ShopyList.DataAccess.CQRS;
-using ShopyList.DataAccess.CQRS.Queries;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ShopyList.DataAccess.CQRS.Queries.ShopsQueries;
 
 namespace ShopyList.ApplicationServices.API.Handlers.ShopsHandlers
 {

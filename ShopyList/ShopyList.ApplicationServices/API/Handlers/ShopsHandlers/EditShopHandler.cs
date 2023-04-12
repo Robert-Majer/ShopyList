@@ -3,11 +3,6 @@ using MediatR;
 using ShopyList.ApplicationServices.API.Domain.ShopsRequestResponse;
 using ShopyList.DataAccess.CQRS;
 using ShopyList.DataAccess.CQRS.Commands.ShopsCommands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ShopyList.ApplicationServices.API.Handlers.ShopsHandlers
 {

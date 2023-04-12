@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ShopyList.ApplicationServices.API.Domain;
+using ShopyList.ApplicationServices.API.Domain.ShoppingListsRequestResponse;
 
 namespace ShopyList.ApplicationServices.Mappings
 {
@@ -7,6 +7,10 @@ namespace ShopyList.ApplicationServices.Mappings
     {
         public ShoppingListProfile()
         {
+            this.CreateMap<EditShoppingListRequest, DataAccess.Entities.ShoppingList>()
+                .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));
+
             this.CreateMap<AddShoppingListRequest, ShopyList.DataAccess.Entities.ShoppingList>()
                 .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));
 

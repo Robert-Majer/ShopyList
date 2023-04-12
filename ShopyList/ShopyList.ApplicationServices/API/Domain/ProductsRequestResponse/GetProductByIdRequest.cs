@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace ShopyList.ApplicationServices.API.Domain
+namespace ShopyList.ApplicationServices.API.Domain.ProductsRequestResponse
 {
     public class GetProductByIdRequest : IRequest<GetProductByIdResponse>
     {

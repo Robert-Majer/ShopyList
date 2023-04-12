@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using MediatR;
-using ShopyList.ApplicationServices.API.Domain;
+using ShopyList.ApplicationServices.API.Domain.ProductsRequestResponse;
 using ShopyList.DataAccess.CQRS;
-using ShopyList.DataAccess.CQRS.Queries;
+using ShopyList.DataAccess.CQRS.Queries.ProductsQueries;
 
-namespace ShopyList.ApplicationServices.API.Handlers
+namespace ShopyList.ApplicationServices.API.Handlers.ProductsHandlers
 {
     public class GetProductByIdHandler : IRequestHandler<GetProductByIdRequest, GetProductByIdResponse>
     {
-        private readonly IMapper mapper;
         private readonly IQueryExecutor queryExecutor;
+        private readonly IMapper mapper;
 
-        public GetProductByIdHandler(IMapper mapper, IQueryExecutor queryExecutor)
+        public GetProductByIdHandler(IQueryExecutor queryExecutor, IMapper mapper)
         {
-            this.mapper = mapper;
             this.queryExecutor = queryExecutor;
+            this.mapper = mapper;
         }
 
         public async Task<GetProductByIdResponse> Handle(GetProductByIdRequest request, CancellationToken cancellationToken)

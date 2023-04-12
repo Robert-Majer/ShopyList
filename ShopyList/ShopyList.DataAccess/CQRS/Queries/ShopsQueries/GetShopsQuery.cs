@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ShopyList.DataAccess.Entities;
 
-namespace ShopyList.DataAccess.CQRS.Queries
+namespace ShopyList.DataAccess.CQRS.Queries.ShopsQueries
 {
     public class GetShopsQuery : QueryBase<List<Shop>>
     {
