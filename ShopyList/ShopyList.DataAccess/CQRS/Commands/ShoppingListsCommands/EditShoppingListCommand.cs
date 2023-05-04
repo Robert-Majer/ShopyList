@@ -8,6 +8,10 @@ namespace ShopyList.DataAccess.CQRS.Commands.ShoppingListsCommands
         public override async Task<ShoppingList> Execute(ShopyListStorageContext context)
         {
             var editShoppingList = await context.ShoppingLists.SingleOrDefaultAsync(x => x.Id == this.Parameter.Id);
+            if (editShoppingList == null)
+            {
+                return null;
+            }
             editShoppingList.Name = this.Parameter.Name;
             await context.SaveChangesAsync();
             return editShoppingList;

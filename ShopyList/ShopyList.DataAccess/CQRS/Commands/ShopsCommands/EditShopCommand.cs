@@ -8,6 +8,10 @@ namespace ShopyList.DataAccess.CQRS.Commands.ShopsCommands
         public override async Task<Shop> Execute(ShopyListStorageContext context)
         {
             var editShop = await context.Shops.SingleOrDefaultAsync(x => x.Id == this.Parameter.Id);
+            if (editShop == null)
+            {
+                return null;
+            }
             editShop.Name = this.Parameter.Name;
             //editShop.TypeOfSection = this.Parameter.TypeOfSection;
             //editShop.SectionNumber = this.Parameter.SectionNumber;

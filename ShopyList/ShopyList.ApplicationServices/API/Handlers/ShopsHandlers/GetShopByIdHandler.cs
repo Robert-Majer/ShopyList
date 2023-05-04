@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShopyList.ApplicationServices.API.Domain.ShopsRequestResponse;
+using ShopyList.ApplicationServices.API.ErrorHandling;
 using ShopyList.DataAccess.CQRS;
 using ShopyList.DataAccess.CQRS.Queries.ShopsQueries;
 
@@ -25,6 +26,14 @@ namespace ShopyList.ApplicationServices.API.Handlers.ShopsHandlers
             };
 
             var shop = await this.queryExecutor.Excecute(query);
+            if (shop == null)
+            {
+                return new GetShopByIdResponse()
+                {
+                    Error = new Domain.ErrorModel(ErrorType.NotFound)
+                };
+            }
+
             var mappedShop = this.mapper.Map<Domain.Models.Shop>(shop);
             var response = new GetShopByIdResponse()
             {

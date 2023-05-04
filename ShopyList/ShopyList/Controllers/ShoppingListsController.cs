@@ -6,61 +6,53 @@ namespace ShopyList.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ShoppingListsController : ControllerBase
+    public class ShoppingListsController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ShoppingListsController(IMediator mediator)
+        public ShoppingListsController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllShoppingLists([FromQuery] GetShoppingListsRequest request)
+        public Task<IActionResult> GetAllShoppingLists([FromQuery] GetShoppingListsRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetShoppingListsRequest, GetShoppingListsResponse>(request);
         }
 
         [HttpGet]
         [Route("{shoppingListId}")]
-        public async Task<IActionResult> GetById([FromRoute] int shoppingListId)
+        public Task<IActionResult> GetById([FromRoute] int shoppingListId)
         {
             var request = new GetShoppingListByIdRequest()
             {
                 ShoppingListId = shoppingListId
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetShoppingListByIdRequest, GetShoppingListByIdResponse>(request);
         }
 
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddShoppingList([FromBody] AddShoppingListRequest request)
+        public Task<IActionResult> AddShoppingList([FromBody] AddShoppingListRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddShoppingListRequest, AddShoppingListResponse>(request);
         }
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> EditShoppingList([FromBody] EditShoppingListRequest request)
+        public Task<IActionResult> EditShoppingList([FromBody] EditShoppingListRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<EditShoppingListRequest, EditShoppingListResponse>(request);
         }
 
         [HttpDelete]
         [Route("{shoppingListId}")]
-        public async Task<IActionResult> DeleteShoppingListById([FromRoute] int shoppingListId)
+        public Task<IActionResult> DeleteShoppingListById([FromRoute] int shoppingListId)
         {
             var request = new DeleteShoppingListByIdRequest()
             {
                 ShoppingListId = shoppingListId
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<DeleteShoppingListByIdRequest, DeleteShoppingListByIdResponse>(request);
         }
     }
 }

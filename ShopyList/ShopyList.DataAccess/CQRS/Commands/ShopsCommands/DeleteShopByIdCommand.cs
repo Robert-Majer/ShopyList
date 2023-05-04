@@ -10,6 +10,10 @@ namespace ShopyList.DataAccess.CQRS.Commands.ShopsCommands
         public override async Task<Shop> Execute(ShopyListStorageContext context)
         {
             var removeShop = await context.Shops.SingleOrDefaultAsync(x => x.Id == this.Id);
+            if (removeShop == null)
+            {
+                return null;
+            }
             context.Shops.Remove(removeShop);
             await context.SaveChangesAsync();
             return removeShop;
