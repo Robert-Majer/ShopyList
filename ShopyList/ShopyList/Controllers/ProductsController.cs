@@ -14,13 +14,11 @@ namespace ShopyList.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IActionResult> GetAllProducts([FromQuery] GetProductsRequest request)
+        public Task<IActionResult> GetAllProducts([FromQuery] GetProductsRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetProductsRequest, GetProductsResponse>(request);
         }
 
-        // =================> przerobiony get w Handlerze
         [HttpGet]
         [Route("{productId}")]
         public Task<IActionResult> GetById([FromRoute] int productId)
@@ -32,7 +30,6 @@ namespace ShopyList.Controllers
             return this.HandleRequest<GetProductByIdRequest, GetProductByIdResponse>(request);
         }
 
-        // przerobiony post
         [HttpPost]
         [Route("")]
         public Task<IActionResult> AddProduct([FromBody] AddProductRequest request)
@@ -42,22 +39,20 @@ namespace ShopyList.Controllers
 
         [HttpPut]
         [Route("")]
-        public async Task<IActionResult> EditProduct([FromBody] EditProductRequest request)
+        public Task<IActionResult> EditProduct([FromBody] EditProductRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<EditProductRequest, EditProductResponse>(request);
         }
 
         [HttpDelete]
         [Route("{productId}")]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int productId)
+        public Task<IActionResult> DeleteProduct([FromRoute] int productId)
         {
             var request = new DeleteProductByIdRequest()
             {
                 ProductId = productId
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<DeleteProductByIdRequest, DeleteProductByIdResponse>(request);
         }
     }
 }
