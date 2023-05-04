@@ -1,13 +1,23 @@
+using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopyList.ApplicationServices.API.Domain;
+using ShopyList.ApplicationServices.API.Validators;
 using ShopyList.ApplicationServices.Mappings;
 using ShopyList.DataAccess;
 using ShopyList.DataAccess.CQRS;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddMvcCore()
+       .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductRequestValidator>());
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
 builder.Services.AddTransient<IQueryExecutor, QueryExecutor>();
 
 builder.Services.AddTransient<ICommandExecutor, CommandExecutor>();
@@ -31,6 +41,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.UseSwagger();
     app.UseSwaggerUI();
 }

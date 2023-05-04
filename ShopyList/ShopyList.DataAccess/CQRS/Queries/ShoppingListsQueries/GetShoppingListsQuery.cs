@@ -7,7 +7,9 @@ namespace ShopyList.DataAccess.CQRS.Queries.ShoppingListsQueries
     {
         public override async Task<List<ShoppingList>> Execute(ShopyListStorageContext context)
         {
-            var shoppingLists = await context.ShoppingLists.ToListAsync();
+            var shoppingLists = await context.ShoppingLists
+                                                .Include(x => x.Products)
+                                                .ToListAsync();
             return shoppingLists;
         }
     }

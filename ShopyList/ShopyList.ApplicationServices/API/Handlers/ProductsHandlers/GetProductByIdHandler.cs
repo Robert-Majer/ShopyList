@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using ShopyList.ApplicationServices.API.Domain.ProductsRequestResponse;
+using ShopyList.ApplicationServices.API.ErrorHandling;
 using ShopyList.DataAccess.CQRS;
 using ShopyList.DataAccess.CQRS.Queries.ProductsQueries;
 
@@ -25,6 +26,15 @@ namespace ShopyList.ApplicationServices.API.Handlers.ProductsHandlers
             };
 
             var product = await this.queryExecutor.Excecute(query);
+
+            if (product == null)
+            {
+                return new GetProductByIdResponse()
+                {
+                    Error = new Domain.ErrorModel(ErrorType.NotFound)
+                };
+            }
+
             var mappedProduct = this.mapper.Map<Domain.Models.Product>(product);
             var response = new GetProductByIdResponse()
             {

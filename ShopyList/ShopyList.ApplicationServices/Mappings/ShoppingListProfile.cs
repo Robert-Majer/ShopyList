@@ -16,7 +16,8 @@ namespace ShopyList.ApplicationServices.Mappings
 
             this.CreateMap<ShopyList.DataAccess.Entities.ShoppingList, ShopyList.ApplicationServices.API.Domain.Models.ShoppingList>()
                 .ForMember(x => x.Id, y => y.MapFrom(z => z.Id))
-                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name));
+                .ForMember(x => x.Name, y => y.MapFrom(z => z.Name))
+                .ForMember(x => x.ProductName, y => y.MapFrom(z => z.Products != null ? z.Products.Select(x => x.Name) : new List<string>()));
         }
     }
 }

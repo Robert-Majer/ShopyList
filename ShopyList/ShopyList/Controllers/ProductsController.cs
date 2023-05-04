@@ -6,13 +6,10 @@ namespace ShopyList.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ProductsController : ControllerBase
+    public class ProductsController : ApiControllerBase
     {
-        private readonly IMediator mediator;
-
-        public ProductsController(IMediator mediator)
+        public ProductsController(IMediator mediator) : base(mediator)
         {
-            this.mediator = mediator;
         }
 
         [HttpGet]
@@ -23,24 +20,24 @@ namespace ShopyList.Controllers
             return this.Ok(response);
         }
 
+        // =================> przerobiony get w Handlerze
         [HttpGet]
         [Route("{productId}")]
-        public async Task<IActionResult> GetById([FromRoute] int productId)
+        public Task<IActionResult> GetById([FromRoute] int productId)
         {
             var request = new GetProductByIdRequest()
             {
                 ProductId = productId
             };
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<GetProductByIdRequest, GetProductByIdResponse>(request);
         }
 
+        // przerobiony post
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> AddProduct([FromBody] AddProductRequest request)
+        public Task<IActionResult> AddProduct([FromBody] AddProductRequest request)
         {
-            var response = await this.mediator.Send(request);
-            return this.Ok(response);
+            return this.HandleRequest<AddProductRequest, AddProductResponse>(request);
         }
 
         [HttpPut]
