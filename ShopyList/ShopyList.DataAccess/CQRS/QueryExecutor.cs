@@ -11,7 +11,7 @@ namespace ShopyList.DataAccess.CQRS
             this.context = context;
         }
 
-        public Task<TResult> Excecute<TResult>(QueryBase<TResult> query)
+        public Task<TResult> Execute<TResult>(QueryBase<TResult> query)
         {
             return query.Execute(this.context);
         }

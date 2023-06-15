@@ -1,14 +1,20 @@
 using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ShopyList.ApplicationServices.API.Domain;
 using ShopyList.ApplicationServices.API.Validators;
 using ShopyList.ApplicationServices.Mappings;
+using ShopyList.Authentication;
 using ShopyList.DataAccess;
 using ShopyList.DataAccess.CQRS;
 
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication("BasicAuthentication")
+    .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
 
 builder.Services.AddMvcCore()
        .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductRequestValidator>());
@@ -47,9 +53,9 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+//app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
-
 app.MapControllers();
 
 app.Run();

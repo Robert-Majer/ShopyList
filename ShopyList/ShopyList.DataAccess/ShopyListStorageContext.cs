@@ -14,5 +14,7 @@ namespace ShopyList.DataAccess
         public DbSet<ShoppingList> ShoppingLists { get; set; }
 
         public DbSet<Shop> Shops { get; set; }
+
+        public DbSet<User> Users { get; set; }
     }
 }

@@ -7,7 +7,6 @@ namespace ShopyList.DataAccess.Entities
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
-
         public DateTime Created { get; set; }
         public bool IsDeleted { get; set; }
         public List<Product> Products { get; set; }

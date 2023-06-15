@@ -25,7 +25,7 @@ namespace ShopyList.ApplicationServices.API.Handlers.ShoppingListsHandlers
                 Id = request.ShoppingListId
             };
 
-            var shoppingList = await this.queryExecutor.Excecute(query);
+            var shoppingList = await this.queryExecutor.Execute(query);
 
             if (shoppingList == null)
             {

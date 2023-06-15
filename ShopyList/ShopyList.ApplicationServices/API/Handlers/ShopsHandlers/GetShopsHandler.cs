@@ -20,7 +20,7 @@ namespace ShopyList.ApplicationServices.API.Handlers
         public async Task<GetShopsResponse> Handle(GetShopsRequest request, CancellationToken cancellationToken)
         {
             var query = new GetShopsQuery();
-            var shops = await this.queryExecutor.Excecute(query);
+            var shops = await this.queryExecutor.Execute(query);
             var mappedShop = this.mapper.Map<List<Domain.Models.Shop>>(shops);
 
             var response = new GetShopsResponse()

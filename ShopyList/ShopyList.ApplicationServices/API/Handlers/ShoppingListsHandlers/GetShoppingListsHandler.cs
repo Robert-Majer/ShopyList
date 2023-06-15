@@ -20,7 +20,7 @@ namespace ShopyList.ApplicationServices.API.Handlers.ShoppingListsHandlers
         public async Task<GetShoppingListsResponse> Handle(GetShoppingListsRequest request, CancellationToken cancellationToken)
         {
             var query = new GetShoppingListsQuery();
-            var shoppingLists = await queryExecutor.Excecute(query);
+            var shoppingLists = await queryExecutor.Execute(query);
             var mappedShoppingLists = mapper.Map<List<Domain.Models.ShoppingList>>(shoppingLists);
             var response = new GetShoppingListsResponse()
             {
