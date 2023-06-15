@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.EntityFrameworkCore;
 using ShopyList.DataAccess.Entities;
 using System;
 using System.Collections.Generic;
@@ -14,15 +15,29 @@ namespace ShopyList.DataAccess.CQRS.Commands.UsersCommands
         public override async Task<User> Execute(ShopyListStorageContext context)
         {
             var validateUser = await context.Users.Where(x => x.Username == this.Parameter.Username)
-                                                  .Where(x => x.Password == this.Parameter.Password)
-                                                  .FirstOrDefaultAsync();
+                                                      .FirstOrDefaultAsync();
 
             if (validateUser == null)
             {
                 return null;
             }
 
-            return validateUser;
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                        password: this.Parameter.Password,
+                        salt: validateUser.Salt,
+                        prf: KeyDerivationPrf.HMACSHA1,
+                        iterationCount: 10000,
+                        numBytesRequested: 256 / 8));
+
+
+            if (validateUser.Password == hashedPassword)
+            {
+                return validateUser;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
