@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.EntityFrameworkCore;
 using ShopyList.DataAccess.Entities;
+using ShopyList.DataAccess.HelperFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,15 +23,7 @@ namespace ShopyList.DataAccess.CQRS.Commands.UsersCommands
                 return null;
             }
 
-            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                        password: this.Parameter.Password,
-                        salt: validateUser.Salt,
-                        prf: KeyDerivationPrf.HMACSHA1,
-                        iterationCount: 10000,
-                        numBytesRequested: 256 / 8));
-
-
-            if (validateUser.Password == hashedPassword)
+            if (HashHelper.VerifyPassword(this.Parameter.Password, validateUser.Password, validateUser.Salt))
             {
                 return validateUser;
             }

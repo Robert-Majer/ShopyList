@@ -15,6 +15,7 @@
     using ShopyList.DataAccess.CQRS;
     using ShopyList.DataAccess.Entities;
     using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+    using ShopyList.DataAccess.HelperFeatures;
 
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
@@ -59,14 +60,7 @@
                 };
                 user = await this.queryExecutor.Execute(query);
 
-                string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                                password: password,
-                                salt: user.Salt,
-                                prf: KeyDerivationPrf.HMACSHA1,
-                                iterationCount: 10000,
-                                numBytesRequested: 256 / 8));
-
-                if (user == null || user.Password != hashedPassword)
+                if (user == null || HashHelper.VerifyPassword(password, user.Password, user.Salt) == false)
                 {
                     return AuthenticateResult.Fail("Invalid Authorization Header");
                 }

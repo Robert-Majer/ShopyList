@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using ShopyList.DataAccess.Entities;
+using ShopyList.DataAccess.HelperFeatures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,21 +16,8 @@ namespace ShopyList.DataAccess.CQRS.Commands.UsersCommands
         {
             var newUser = this.Parameter;
 
-            byte[] salt = new byte[128 / 8];
-            using( var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            };
-            newUser.Salt = salt;
-
-            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
-            password: newUser.Password,
-            salt: salt,
-            prf: KeyDerivationPrf.HMACSHA1,
-            iterationCount: 10000,
-            numBytesRequested: 256 / 8));
-
-            newUser.Password = hashed;
+            newUser.Salt = HashHelper.GenerateSalt();
+            newUser.Password = HashHelper.HashPassword(newUser.Password,newUser.Salt);
 
             await context.Users.AddAsync(newUser);
             await context.SaveChangesAsync();
